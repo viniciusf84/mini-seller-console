@@ -100,7 +100,7 @@ npm run preview
 ## 🌍 Demo
 
 The project is live here:  
-👉 [Vercel Demo](https://YOUR-LINK-HERE.vercel.app)
+👉 [Vercel Demo](https://mini-seller-console-zeta-nine.vercel.app)
 
 ---
 
