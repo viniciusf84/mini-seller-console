@@ -22,7 +22,7 @@ export default function Toast({ message, visible, onClose }: ToastProps) {
                   : "translate-y-3 opacity-0 pointer-events-none"
               }`}
     >
-      <div className="rounded-lg bg-gray-900 text-white px-4 py-2 shadow-lg text-sm font-medium">
+      <div className="rounded-lg bg-emerald-600 text-white px-4 py-2 shadow-lg text-sm font-medium">
         {message}
       </div>
     </div>
