@@ -10,6 +10,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@components/ui/select";
+import { Button } from "./ui/button";
+import { Input } from "./ui/input";
 
 type Props = {
   lead: Lead | null;
@@ -96,7 +98,7 @@ export default function LeadDetailPanel({
     <div
       className={`fixed inset-0 z-50 ${isOpen ? "" : "pointer-events-none"}`}
     >
-      {/* Fundo com fade */}
+      {/* overlay */}
       <div
         className={`absolute inset-0 bg-black/30 transition-opacity duration-300 ${
           isOpen ? "opacity-100" : "opacity-0"
@@ -105,9 +107,10 @@ export default function LeadDetailPanel({
         aria-hidden={!isOpen}
       />
 
-      {/* Painel lateral com slide */}
+      {/* painel lateral */}
       <div
-        className={`absolute right-0 top-0 h-full w-full sm:w-[420px] bg-white shadow-xl p-4 overflow-y-auto
+        className={`absolute right-0 top-0 h-full w-full sm:w-[420px] bg-white shadow-xl
+                    flex flex-col
                     transform transition-transform duration-300 ease-out
                     ${isOpen ? "translate-x-0" : "translate-x-full"}`}
         role="dialog"
@@ -116,76 +119,75 @@ export default function LeadDetailPanel({
       >
         {lead && local && (
           <>
-            <div className="flex items-center justify-between">
-              <h2 className="text-lg font-semibold">Lead Detail</h2>
-              <button
-                onClick={onClose}
-                className="rounded-md px-2 py-1 hover:bg-gray-100"
-              >
-                ✕
-              </button>
-            </div>
-
-            <div className="mt-4 space-y-3">
-              <div>
-                <label className="block text-sm text-gray-600">Name</label>
-                <div className="font-medium">{local.name}</div>
-              </div>
-
-              <div>
-                <label className="block text-sm text-gray-600">Company</label>
-                <div className="font-medium">{local.company}</div>
-              </div>
-
-              <div>
-                <label className="block text-sm text-gray-600">Email</label>
-                <input
-                  className="mt-1 w-full rounded-lg border px-3 py-2"
-                  value={local.email}
-                  onChange={(e) => update("email", e.target.value)}
-                />
-              </div>
-
-              <div>
-                <label className="block text-sm text-gray-600">Status</label>
-                <Select
-                  value={local.status}
-                  onValueChange={(v) => update("status", v)}
-                >
-                  <SelectTrigger className="mt-1 w-full">
-                    <SelectValue placeholder="Select status" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="New">New</SelectItem>
-                    <SelectItem value="Contacted">Contacted</SelectItem>
-                    <SelectItem value="Qualified">Qualified</SelectItem>
-                    <SelectItem value="Unqualified">Unqualified</SelectItem>
-                  </SelectContent>
-                </Select>
-              </div>
-
-              {error && <div className="text-sm text-red-600">{error}</div>}
-
-              <div className="flex gap-2 pt-2">
-                <button
-                  onClick={handleSave}
-                  disabled={saving}
-                  className="rounded-lg bg-blue-600 px-4 py-2 text-white disabled:opacity-60"
-                >
-                  {saving ? "Saving..." : "Save"}
-                </button>
+            {/* conteúdo rolável */}
+            <div className="flex-1 overflow-y-auto p-4 pr-2">
+              <div className="flex items-center justify-between">
+                <h2 className="text-lg font-semibold">Lead Detail</h2>
                 <button
                   onClick={onClose}
-                  className="rounded-lg border px-4 py-2"
+                  className="rounded-md px-2 py-1 hover:bg-gray-100"
                 >
-                  Cancel
+                  ✕
                 </button>
-                <button
+              </div>
+
+              <div className="mt-4 space-y-3">
+                <div>
+                  <label className="block text-sm text-gray-600">Name</label>
+                  <div className="font-medium">{local.name}</div>
+                </div>
+
+                <div>
+                  <label className="block text-sm text-gray-600">Company</label>
+                  <div className="font-medium">{local.company}</div>
+                </div>
+
+                <div>
+                  <label className="block text-sm text-gray-600">Email</label>
+                  <Input
+                    type="email"
+                    value={local.email}
+                    onChange={(e) => update("email", e.target.value)}
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-sm text-gray-600">Status</label>
+                  <Select
+                    value={local.status}
+                    onValueChange={(v) => update("status", v)}
+                  >
+                    <SelectTrigger className="mt-1 w-full">
+                      <SelectValue placeholder="Select status" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="New">New</SelectItem>
+                      <SelectItem value="Contacted">Contacted</SelectItem>
+                      <SelectItem value="Qualified">Qualified</SelectItem>
+                      <SelectItem value="Unqualified">Unqualified</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+
+                {error && <div className="text-sm text-red-600">{error}</div>}
+              </div>
+            </div>
+
+            {/* footer fixo */}
+            <div className="shrink-0 border-t bg-white p-4">
+              <div className="flex gap-2">
+                <Button onClick={handleSave} disabled={saving}>
+                  {saving ? "Saving..." : "Save"}
+                </Button>
+                <Button onClick={onClose} variant="outline">
+                  Cancel
+                </Button>
+                <Button
                   onClick={handleConvert}
-                  className="ml-auto rounded-lg bg-emerald-600 px-4 py-2 text-white"
+                  className="ml-auto bg-emerald-600 hover:bg-emerald-700"
                 >
                   Convert Lead
-                </button>
+                </Button>
               </div>
             </div>
           </>

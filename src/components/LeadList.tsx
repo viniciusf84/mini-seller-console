@@ -8,6 +8,7 @@ import {
 } from "@components/ui/select";
 import { Lead } from "../types";
 import { useLocalStorage } from "@hooks/useLocalStorage";
+import { Input } from "./ui/input";
 
 type Props = {
   leads: Lead[];
@@ -50,11 +51,10 @@ export default function LeadList({ leads, onSelect }: Props) {
   return (
     <div className="space-y-3">
       <div className="flex flex-col md:flex-row gap-2">
-        <input
+        <Input
           value={search}
           onChange={(e) => setSearch(e.target.value)}
           placeholder="Search by name/company"
-          className="w-full md:max-w-sm rounded-lg border border-gray-300 px-3 py-2"
         />
         <Select value={statusFilter} onValueChange={setStatusFilter}>
           <SelectTrigger>
