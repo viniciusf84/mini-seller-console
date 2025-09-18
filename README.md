@@ -32,7 +32,7 @@ The **Mini Seller Console** is a dashboard for managing leads and opportunities,
   - Smooth scroll to the newly added row
   - Temporary visual highlight
 
-- 🔔 **Toasts (Sonner)**
+- 🔔 **Toasts**
 
   - Success/error notifications centered at the bottom
   - Friendly and consistent messages
@@ -50,7 +50,6 @@ The **Mini Seller Console** is a dashboard for managing leads and opportunities,
 - **Vite** (dev server + build)
 - **Tailwind CSS** (styling)
 - **shadcn/ui** (Select, accessible components)
-- **Sonner** (modern toasts)
 - **lucide-react** (icons)
 
 ---
